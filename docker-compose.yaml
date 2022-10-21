@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  doctor-db:
+    image: postgres:latest
+    container_name: doctor-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: lib
+    ports:
+      - '${DB_MASTER_EXPOSED_PORT:-5435}:5432'
+    volumes:
+      - doctor_data:/var/lib/postgresql/data
+  
+  doctor-server:
+    build:
+      context: ./services
+      dockerfile: ./Dockerfile
+    container_name: doctor-server
+    command: sh -c "./wait-for-it.sh -t 0 doctor-db:5432 --strict -- npm run start:dev"
+    depends_on:
+      - doctor-db
+    environment:
+      APPHOST: localhost
+      APPPORT: 7080
+      DBHOST: doctor-db
+      DBPORT: 5432
+      DBUSERNAME: postgres
+      DBPASSWORD: 123
+      DBDATABASE: lib
+      DBSCHEMA: public
+      DBRATETABLE: doctor
+    ports:
+      - 7080:7080
+
+volumes:
+  doctor_data:
+    driver: local
