@@ -44,7 +44,6 @@ make build
 ```shell
 // Run Application
 make up
-
 ```
 
 ** The App will running on `localhost:7080` as default, if you want to make any change, feel free to do so. **
@@ -52,6 +51,31 @@ make up
 
 -- When you finished spinning up the application, you can go and see this log if you wanted. If you have any
 questions about logging, see `make logs` command down description below.
+
+### Migrations
+
+-- The entites migration is not auto generate by orm, you can find them in `services/manul_migration`
+
+```text
+|-- LICENCE
+|-- Makefile
+|-- README.md
+|-- docker-compose.yaml
+-- services
+    |-- manul_migration
+    |   |-- default.sql
+    |   |-- order.create.sql
+    |   |-- order.insert.sql
+    |   |-- patient.create.sql
+    |   `-- patient.insert.sql
+```
+
+Execution sequence
+- First you have to execute `default.sql`
+- Second execute `patient.create.sql`
+- Third execute `order.create.sql`
+- Fourth execute `patient.insert.sql`
+- Fifth execute `order.insert.sql`
 
 #### Helper command
 
@@ -67,7 +91,7 @@ make help
 
 ```shell
 make build            # building all containers
-make build c=doctor-db # building database only
+make build c=doctordb # building database only
 ```
 
 #### Up command
@@ -76,41 +100,41 @@ make build c=doctor-db # building database only
 
 ```shell
 make up            # up all containers
-make up c=doctor-db # up database only
+make up c=doctordb # up database only
 ```
 
 #### Start command
 
-- Is used to start the containers. To start only one container for example if I only want to start db container run `make start c=doctor-db`
+- Is used to start the containers. To start only one container for example if I only want to start db container run `make start c=doctordb`
 
 ```shell
 make start            # starting all containers
-make start c=doctor-db # starting database only
+make start c=doctordb # starting database only
 ```
 
 #### Down command
 
-- Is used to stop and remove containers. To delete specific container use for example if I only want to delete db container run `make down c=doctor-db`
+- Is used to stop and remove containers. To delete specific container use for example if I only want to delete db container run `make down c=doctordb`
 
 ```shell
 make down            # delete all containers
-make down c=doctor-db # delete database only
+make down c=doctordb # delete database only
 ```
 
 #### Restart command
 
-- Is used to restart containers. To restart specific container use for example if I only want to restart db container run `make down c=doctor-db`
+- Is used to restart containers. To restart specific container use for example if I only want to restart db container run `make down c=doctordb`
 
 ```shell
 make restart            # restart all containers
-make restart c=doctor-db # restart database only
+make restart c=doctordb # restart database only
 ```
 
 #### Logs command
 
-- Is used to see the log of the containers. To log specific container use for example if I only want to log db container run `make log c=doctor-db`
+- Is used to see the log of the containers. To log specific container use for example if I only want to log db container run `make log c=doctordb`
 
 ```shell
 make log            # log all containers
-make log c=doctor-db # log database only
+make log c=doctordb # log database only
 ```
