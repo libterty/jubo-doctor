@@ -30,7 +30,7 @@ services:
       - doctorpgadmin:/var/lib/pgadmin
     ports:
       - '5050:5050'
-  
+
   doctorserver:
     build:
       context: ./services
@@ -49,8 +49,32 @@ services:
       DBDATABASE: doctor
       DBSCHEMA: public
       DBRATETABLE: doctor
+    expose:
+      - 7080
+
+  doctorclient:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    container_name: doctorclient
+    depends_on:
+      - doctorserver
+    stdin_open: true
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+
+  nginx:
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    container_name: nginx
+    depends_on:
+      - doctorserver
+      - doctorclient
+    restart: always
     ports:
-      - 7080:7080
+      - '8080:80'
 
 volumes:
   doctorData:
