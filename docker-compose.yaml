@@ -54,7 +54,7 @@ services:
 
   doctorclient:
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
       context: ./client
     container_name: doctorclient
     depends_on:

@@ -46,7 +46,7 @@ make build
 make up
 ```
 
-** The App will running on `localhost:7080` as default, if you want to make any change, feel free to do so. **
+** The App will running on `localhost:8080` as default, if you want to make any change, feel free to do so. **
 
 
 -- When you finished spinning up the application, you can go and see this log if you wanted. If you have any
