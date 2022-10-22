@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common'
 import { ApiHeader, ApiResponse, ApiTags } from '@nestjs/swagger'
 import Patient from '@server/entities/Patient'
-import { PatientoService } from '@server/patients/patient.service'
+import { PatientService } from '@server/patients/patient.service'
 import { QueryBaseDtos } from '@server/shares/dtos/paging.dto'
 import { config } from '@server/config/general'
 import { ERoutesMap } from '@server/shares/enums'
@@ -18,7 +18,7 @@ import { ERoutesMap } from '@server/shares/enums'
 })
 @Controller(ERoutesMap.PATIENT)
 export class PatientController {
-  constructor(private patientoService: PatientoService) {}
+  constructor(private patientService: PatientService) {}
 
   @Get('/')
   @ApiResponse({ status: 200, description: 'Get patient success' })
@@ -31,7 +31,7 @@ export class PatientController {
         limit: number
         offset: number
       }> {
-    return this.patientoService.findPatients(queryBaseDtos)
+    return this.patientService.findPatients(queryBaseDtos)
   }
 
 }

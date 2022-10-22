@@ -4,7 +4,7 @@ $body$
 DECLARE
 BEGIN
   EXECUTE 'CREATE TABLE "patient" (
-    "id" INTEGER NOT NULL DEFAULT 1,
+    "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
     "name" character varying(255) NOT NULL,
     "version" integer NOT NULL,
     "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),

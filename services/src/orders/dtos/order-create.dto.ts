@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber, IsString, MaxLength, MinLength } from "class-validator";
+import { IsString, IsUUID, MaxLength, MinLength } from "class-validator";
 import { IsPatient } from "@server/libs/patient.validation";
 
 export class OrderCreateDto {
@@ -14,7 +14,7 @@ export class OrderCreateDto {
   public message: string
 
   @ApiProperty()
-  @IsNumber()
+  @IsUUID()
   @IsPatient()
-  public patientId: number
+  public patientId: string
 }

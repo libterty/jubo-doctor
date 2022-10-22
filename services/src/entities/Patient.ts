@@ -8,8 +8,8 @@ import { Nullable } from "@server/shares/types"
   synchronize: false
 })
 export default class Patient extends BaseEntity {
-  @PrimaryGeneratedColumn('increment')
-  public id: number
+  @PrimaryGeneratedColumn('uuid')
+  public id: string
 
   @Column({ type: 'varchar', nullable: false, length: 255 })
   public name: string

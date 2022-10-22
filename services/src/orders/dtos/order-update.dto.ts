@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
-import { IsPatient, IsOrder } from "@server/libs/patient.validation";
+import { IsOptional, IsString, IsUUID, MaxLength, MinLength } from "class-validator";
+import { IsPatient } from "@server/libs/patient.validation";
 import { Nullable } from "@server/shares/types";
 
 export class OrderUpdateDto {
@@ -17,7 +17,7 @@ export class OrderUpdateDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
+  @IsUUID()
   @IsPatient()
-  public patientId?: Nullable<number>
+  public patientId?: Nullable<string>
 }

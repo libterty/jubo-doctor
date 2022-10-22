@@ -1,10 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber } from "class-validator";
+import { IsUUID } from "class-validator";
 import { IsOrder } from "@server/libs/patient.validation";
 
 export class OrderGetDto {
   @ApiProperty()
-  @IsNumber()
+  @IsUUID()
   @IsOrder()
-  public id: number
+  public id: string
 }

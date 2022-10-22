@@ -4,23 +4,23 @@ INSERT INTO patient(
   "version"
 )
 VALUES (
-  1,
+  uuid_generate_v4(),
   'user_1',
   CAST(1 AS INT)
 ),(
-  2,
+  uuid_generate_v4(),
   'user_2',
   CAST(1 AS INT)
 ),(
-  3,
+  uuid_generate_v4(),
   'user_3',
   CAST(1 AS INT)
 ),(
-  4,
+  uuid_generate_v4(),
   'user_4',
   CAST(1 AS INT)
 ),(
-  5,
+  uuid_generate_v4(),
   'user_5',
   CAST(1 AS INT)
 );

@@ -7,10 +7,11 @@ import { InjectRepository } from '@nestjs/typeorm'
 import Order from '@server/entities/Order'
 import { OrderRepository } from '@server/orders/order.repository'
 import { OrderGetDto ,OrderFindDto, OrderCreateDto, OrderUpdateDto } from '@server/orders/dtos'
+import { ERoutesMap } from '@server/shares/enums'
 
 @Injectable()
 export class OrderService {
-  private readonly logger = new Logger('order', true)
+  private readonly logger = new Logger(ERoutesMap.ORDER, true)
   constructor(
     @InjectRepository(OrderRepository)
     private readonly orderRepository: OrderRepository,

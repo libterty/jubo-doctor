@@ -7,8 +7,8 @@ import Patient from '@server/entities/Patient'
   synchronize: false
 })
 export default class Order extends BaseEntity {
-  @PrimaryGeneratedColumn('increment')
-  public id: number
+  @PrimaryGeneratedColumn('uuid')
+  public id: string
 
   @Column({ type: 'varchar', nullable: false })
   public message: string

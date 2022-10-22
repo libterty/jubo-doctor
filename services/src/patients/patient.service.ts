@@ -4,15 +4,16 @@ import {
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import Patient from '@server/entities/Patient'
-import { Patientepository } from './patient.repository'
+import { PatientRepository } from './patient.repository'
 import { QueryBaseDtos } from '@server/shares/dtos/paging.dto'
+import { ERoutesMap } from '@server/shares/enums'
 
 @Injectable()
-export class PatientoService {
+export class PatientService {
+  private readonly logger = new Logger(ERoutesMap.PATIENT, true)
   constructor(
-    private readonly logger: Logger,
-    @InjectRepository(Patientepository)
-    private readonly patientepository: Patientepository,
+    @InjectRepository(PatientRepository)
+    private readonly patientRepository: PatientRepository,
   ) {}
 
   public async findPatients(
@@ -26,7 +27,7 @@ export class PatientoService {
     try {
       if (!queryBaseDtos.limit) queryBaseDtos.limit = '10'
       if (!queryBaseDtos.offset) queryBaseDtos.offset = '0'
-      const result = await this.patientepository.findPatients(queryBaseDtos)
+      const result = await this.patientRepository.findPatients(queryBaseDtos)
       return Object.assign(result, {
         limit: Number(queryBaseDtos.limit),
         offset: Number(queryBaseDtos.offset),

@@ -22,7 +22,7 @@ export class OrderRepository extends Repository<Order> {
     const qb: SelectQueryBuilder<Order> = this.connection
       .getRepository(Order)
       .createQueryBuilder('od')
-      .where('od.patientId = :patientId', { patientId: Number(orderFindDto.patientId) })
+      .where('od.patientId = :patientId', { patientId: orderFindDto.patientId })
     const count = await qb.getCount()
     const data = await qb
       .limit(limit)
@@ -39,7 +39,7 @@ export class OrderRepository extends Repository<Order> {
     }
   }
 
-  public async getOrderById(id: number): Promise<Partial<Order>> {
+  public async getOrderById(id: string): Promise<Partial<Order>> {
     return this.connection
       .getRepository(Order)
       .createQueryBuilder('od')

@@ -7,28 +7,28 @@ INSERT INTO "order"(
   "version"
 )
 VALUES (
-  1,
+  uuid_generate_v4(),
   '超過120請施打8u',
-  1,
+  (SELECT pt.id FROM patient AS pt WHERE pt.name = 'user_1'),
   CAST(1 AS INT)
 ),(
-  2,
+  uuid_generate_v4(),
   '超過110請施打7u',
-  1,
+  (SELECT pt.id FROM patient AS pt WHERE pt.name = 'user_1'),
   CAST(1 AS INT)
 ),(
-  3,
+  uuid_generate_v4(),
   '超過100請施打6u',
-  1,
+  (SELECT pt.id FROM patient AS pt WHERE pt.name = 'user_1'),
   CAST(1 AS INT)
 ),(
-  4,
+  uuid_generate_v4(),
   '超過100請施打6u',
-  2,
+  (SELECT pt.id FROM patient AS pt WHERE pt.name = 'user_2'),
   CAST(1 AS INT)
 ),(
-  5,
+  uuid_generate_v4(),
   '超過100請施打6u',
-  4,
+  (SELECT pt.id FROM patient AS pt WHERE pt.name = 'user_4'),
   CAST(1 AS INT)
 );

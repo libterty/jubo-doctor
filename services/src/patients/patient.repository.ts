@@ -6,7 +6,7 @@ import { QueryBaseDtos } from '@server/shares/dtos/paging.dto'
 import Order from '@server/entities/Order'
 
 @EntityRepository(Patient)
-export class Patientepository extends Repository<Patient> {
+export class PatientRepository extends Repository<Patient> {
   protected connection!: Connection
 
   constructor(@Inject('CONNECTION') connection: Connection) {

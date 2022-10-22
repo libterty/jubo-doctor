@@ -13,7 +13,7 @@ export class IsPatientConstraint implements ValidatorConstraintInterface {
     return this.errorMessage
   }
 
-  private async checkIsPatient(id: number): Promise<Partial<Patient>> {
+  private async checkIsPatient(id: string): Promise<Partial<Patient>> {
     return getRepository(Patient)
       .createQueryBuilder('share')
       .where('share.id = :id', { id })
@@ -22,7 +22,7 @@ export class IsPatientConstraint implements ValidatorConstraintInterface {
       .getRawOne<Partial<Patient>>()
   }
 
-  public async validate(id: number, args: ValidationArguments): Promise<boolean> {
+  public async validate(id: string, args: ValidationArguments): Promise<boolean> {
     const isValid = await this.checkIsPatient(id)
     if (!isValid) {
       this.errorMessage = 'Patient id does not exist'
@@ -52,7 +52,7 @@ export class IsOrderConstraint implements ValidatorConstraintInterface {
     return this.errorMessage
   }
 
-  private async checkIsOrder(id: number): Promise<Partial<Order>> {
+  private async checkIsOrder(id: string): Promise<Partial<Order>> {
     return getRepository(Order)
       .createQueryBuilder('share')
       .where('share.id = :id', { id })
@@ -61,7 +61,7 @@ export class IsOrderConstraint implements ValidatorConstraintInterface {
       .getRawOne<Partial<Order>>()
   }
 
-  public async validate(id: number, args: ValidationArguments): Promise<boolean> {
+  public async validate(id: string, args: ValidationArguments): Promise<boolean> {
     const isValid = await this.checkIsOrder(id)
     if (!isValid) {
       this.errorMessage = 'Order id does not exist'
