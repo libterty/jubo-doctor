@@ -1,5 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { config } from '@server/config/general'
+import Order from '@server/entities/Order'
+import Patient from '@server/entities/Patient'
 
 export const ormConfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -8,7 +10,7 @@ export const ormConfig: TypeOrmModuleOptions = {
   username: config.DB_SETTINGS.username,
   password: config.DB_SETTINGS.password,
   database: config.DB_SETTINGS.database,
-  entities: [],
+  entities: [Patient, Order],
   migrations: [`${__dirname}./migration/*.ts`],
   subscribers: [],
   synchronize: true,

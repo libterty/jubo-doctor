@@ -1,40 +1,57 @@
 version: "3"
 
 services:
-  doctor-db:
-    image: postgres:latest
-    container_name: doctor-db
+  doctordb:
+    image: postgres:13
+    container_name: doctordb
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
-      POSTGRES_DB: lib
+      POSTGRES_DB: doctor
     ports:
-      - '${DB_MASTER_EXPOSED_PORT:-5435}:5432'
+      - '${DB_MASTER_EXPOSED_PORT:-54320}:5432'
     volumes:
-      - doctor_data:/var/lib/postgresql/data
+      - doctorData:/var/lib/postgresql/data
+
+  doctorpgadmin:
+    container_name: doctorpgadmin
+    image: dpage/pgadmin4
+    links:
+      - doctordb
+    depends_on:
+      - doctordb
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 5050
+    volumes:
+      - doctorpgadmin:/root/.pgadmin
+      - doctorpgadmin:/var/lib/pgadmin
+    ports:
+      - '5050:5050'
   
-  doctor-server:
+  doctorserver:
     build:
       context: ./services
       dockerfile: ./Dockerfile
-    container_name: doctor-server
-    command: sh -c "./wait-for-it.sh -t 0 doctor-db:5432 --strict -- npm run start:dev"
+    container_name: doctorserver
+    command: sh -c "./wait-for-it.sh -t 0 doctordb:5432 --strict -- npm run start:prod"
     depends_on:
-      - doctor-db
+      - doctordb
     environment:
       APPHOST: localhost
       APPPORT: 7080
-      DBHOST: doctor-db
+      DBHOST: doctordb
       DBPORT: 5432
       DBUSERNAME: postgres
       DBPASSWORD: 123
-      DBDATABASE: lib
+      DBDATABASE: doctor
       DBSCHEMA: public
       DBRATETABLE: doctor
     ports:
       - 7080:7080
 
 volumes:
-  doctor_data:
-    driver: local
+  doctorData:
+  doctorpgadmin:
