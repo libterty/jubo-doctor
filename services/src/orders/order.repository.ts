@@ -25,7 +25,13 @@ export class OrderRepository extends Repository<Order> {
     const data = await qb
       .limit(limit)
       .offset(offset)
-      .select(['od."id" AS "id"', 'od."message" AS "message"', 'od."patientId" AS "patientId"'])
+      .select([
+        'od."id" AS "id"',
+        'od."message" AS "message"',
+        'od."patientId" AS "patientId"',
+        'od."createdAt" AS "createdAt"',
+        'od."updatedAt" AS "updatedAt"',
+      ])
       .getRawMany<Partial<Order>>()
     return {
       data,
@@ -38,7 +44,13 @@ export class OrderRepository extends Repository<Order> {
       .getRepository(Order)
       .createQueryBuilder('od')
       .where('od.id = :id', { id })
-      .select(['od."id" AS "id"', 'od."message" AS "message"', 'od."patientId" AS "patientId"'])
+      .select([
+        'od."id" AS "id"',
+        'od."message" AS "message"',
+        'od."patientId" AS "patientId"',
+        'od."createdAt" AS "createdAt"',
+        'od."updatedAt" AS "updatedAt"',
+      ])
       .getRawOne<Partial<Order>>()
   }
 

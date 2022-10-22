@@ -25,6 +25,8 @@ export class OrderController {
     count: number
     limit: number
     offset: number
+    currentPage: number
+    totalPages: number
   }> {
     return this.orderService.findOrders(searchDto)
   }

@@ -24,6 +24,8 @@ export class OrderService {
     count: number
     limit: number
     offset: number
+    currentPage: number
+    totalPages: number
   }> {
     try {
       if (!orderFindDto.limit) orderFindDto.limit = '10'
@@ -32,6 +34,8 @@ export class OrderService {
       return Object.assign(result, {
         limit: Number(orderFindDto.limit),
         offset: Number(orderFindDto.offset),
+        currentPage: Number(orderFindDto.offset),
+        totalPages: Math.ceil(Number(orderFindDto.limit) / Number(orderFindDto.offset))
       })
     } catch (error) {
       this.logger.error(error.message, 'findOrders', 'OrderService')

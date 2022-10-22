@@ -33,6 +33,8 @@ export class PatientRepository extends Repository<Patient> {
         'pt."name" AS "name"',
         `(SELECT COALESCE(array_to_json(array_agg(od.id)), '[]')) AS "orderIds"`,
         'COUNT(od.id) AS "ordersAmount"',
+        'pt."createdAt" AS "createdAt"',
+        'pt."updatedAt" AS "updatedAt"',
       ])
       .groupBy('pt.id')
       .orderBy('pt."updatedAt"', 'DESC', 'NULLS LAST')
