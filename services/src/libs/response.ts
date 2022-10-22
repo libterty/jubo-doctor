@@ -1,5 +1,5 @@
 import { HttpStatus } from '@nestjs/common'
-import * as IShare from '../shares/interfaces'
+import * as IShare from '@server/shares/interfaces'
 
 export default class HTTPResponse {
   /**
