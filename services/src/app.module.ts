@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { TerminusModule } from '@nestjs/terminus'
 import { HealthModule } from '@server/healths/health.module'
 import { PatientModule } from '@server/patients/patient.module'
+import { OrderModule } from '@server/orders/order.module'
 import { PingController } from '@server/terminus/terminus.controller'
 import { ormConfig } from '@server/config/orm.config'
 
@@ -12,7 +13,8 @@ import { ormConfig } from '@server/config/orm.config'
     TypeOrmModule.forRoot(ormConfig),
     TerminusModule,
     HealthModule,
-    PatientModule
+    PatientModule,
+    OrderModule
   ],
 })
 export class AppModule {}

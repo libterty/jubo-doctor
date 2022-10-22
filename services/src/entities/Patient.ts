@@ -9,7 +9,7 @@ import { Nullable } from "@server/shares/types"
 })
 export default class Patient extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
-  public id: string
+  public id: number
 
   @Column({ type: 'varchar', nullable: false, length: 255 })
   public name: string
