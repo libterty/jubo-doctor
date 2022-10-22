@@ -1,9 +1,4 @@
-import {
-  Controller,
-  Get,
-  Query,
-  ValidationPipe,
-} from '@nestjs/common'
+import { Controller, Get, Query, ValidationPipe } from '@nestjs/common'
 import { ApiHeader, ApiResponse, ApiTags } from '@nestjs/swagger'
 import Patient from '@server/entities/Patient'
 import { PatientService } from '@server/patients/patient.service'
@@ -24,14 +19,13 @@ export class PatientController {
   @ApiResponse({ status: 200, description: 'Get patient success' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   findPatients(
-      @Query(ValidationPipe) queryBaseDtos: QueryBaseDtos,
+    @Query(ValidationPipe) queryBaseDtos: QueryBaseDtos,
   ): Promise<{
-        data: Partial<Patient>[]
-        count: number
-        limit: number
-        offset: number
-      }> {
+    data: Partial<Patient>[]
+    count: number
+    limit: number
+    offset: number
+  }> {
     return this.patientService.findPatients(queryBaseDtos)
   }
-
 }

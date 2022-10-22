@@ -1,7 +1,4 @@
-import {
-  Injectable,
-  Logger,
-} from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import Patient from '@server/entities/Patient'
 import { PatientRepository } from './patient.repository'
@@ -19,11 +16,11 @@ export class PatientService {
   public async findPatients(
     queryBaseDtos: QueryBaseDtos,
   ): Promise<{
-      data: Partial<Patient>[]
-      count: number
-      limit: number
-      offset: number
-    }> {
+    data: Partial<Patient>[]
+    count: number
+    limit: number
+    offset: number
+  }> {
     try {
       if (!queryBaseDtos.limit) queryBaseDtos.limit = '10'
       if (!queryBaseDtos.offset) queryBaseDtos.offset = '0'
@@ -32,8 +29,7 @@ export class PatientService {
         limit: Number(queryBaseDtos.limit),
         offset: Number(queryBaseDtos.offset),
       })
-    }
-    catch (error) {
+    } catch (error) {
       this.logger.error(error.message, 'findTodos', 'TodoService')
       throw error
     }

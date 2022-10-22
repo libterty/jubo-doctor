@@ -1,4 +1,4 @@
 export enum ERoutesMap {
   PATIENT = 'patients',
-  ORDER = 'orders'
+  ORDER = 'orders',
 }

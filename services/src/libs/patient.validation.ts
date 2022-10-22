@@ -1,9 +1,14 @@
-
-import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator'
+import {
+  registerDecorator,
+  ValidationArguments,
+  ValidationOptions,
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+} from 'class-validator'
 import { getRepository } from 'typeorm'
 import Patient from '@server/entities/Patient'
 import Order from '@server/entities/Order'
-
+import { ObjectLiteral } from '@server/shares/types'
 
 @ValidatorConstraint({ async: true })
 export class IsPatientConstraint implements ValidatorConstraintInterface {
@@ -32,7 +37,7 @@ export class IsPatientConstraint implements ValidatorConstraintInterface {
   }
 }
 export function IsPatient(validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function(object: ObjectLiteral, propertyName: string) {
     registerDecorator({
       name: 'IsPatient',
       target: object.constructor,
@@ -71,7 +76,7 @@ export class IsOrderConstraint implements ValidatorConstraintInterface {
   }
 }
 export function IsOrder(validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function(object: ObjectLiteral, propertyName: string) {
     registerDecorator({
       name: 'IsOrder',
       target: object.constructor,

@@ -36,4 +36,3 @@ export function isEmptyObj(obj: { [key: string]: any }): boolean {
   }
   return true
 }
-

@@ -14,9 +14,7 @@ export class PatientRepository extends Repository<Patient> {
     this.connection = connection
   }
 
-  public async findPatients(
-    queryBaseDtos: QueryBaseDtos,
-  ) {
+  public async findPatients(queryBaseDtos: QueryBaseDtos) {
     const limit = Number(queryBaseDtos.limit)
     const offset = Number(queryBaseDtos.offset) * limit
     const qb: SelectQueryBuilder<Patient> = this.connection
@@ -34,10 +32,10 @@ export class PatientRepository extends Repository<Patient> {
         'pt."id" AS "id"',
         'pt."name" AS "name"',
         `(SELECT COALESCE(array_to_json(array_agg(od.id)), '[]')) AS "orderIds"`,
-        'COUNT(od.id) AS "ordersAmount"'
+        'COUNT(od.id) AS "ordersAmount"',
       ])
       .groupBy('pt.id')
-      .orderBy('pt."updatedAt"', 'DESC', "NULLS LAST")
+      .orderBy('pt."updatedAt"', 'DESC', 'NULLS LAST')
       .getRawMany()
     return {
       data,

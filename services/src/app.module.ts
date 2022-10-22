@@ -14,7 +14,7 @@ import { ormConfig } from '@server/config/orm.config'
     TerminusModule,
     HealthModule,
     PatientModule,
-    OrderModule
+    OrderModule,
   ],
 })
 export class AppModule {}

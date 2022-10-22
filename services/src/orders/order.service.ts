@@ -1,12 +1,8 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common'
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import Order from '@server/entities/Order'
 import { OrderRepository } from '@server/orders/order.repository'
-import { OrderGetDto ,OrderFindDto, OrderCreateDto, OrderUpdateDto } from '@server/orders/dtos'
+import { OrderGetDto, OrderFindDto, OrderCreateDto, OrderUpdateDto } from '@server/orders/dtos'
 import { ERoutesMap } from '@server/shares/enums'
 
 @Injectable()
@@ -24,11 +20,11 @@ export class OrderService {
   public async findOrders(
     orderFindDto: OrderFindDto,
   ): Promise<{
-      data: Partial<Order>[]
-      count: number
-      limit: number
-      offset: number
-    }> {
+    data: Partial<Order>[]
+    count: number
+    limit: number
+    offset: number
+  }> {
     try {
       if (!orderFindDto.limit) orderFindDto.limit = '10'
       if (!orderFindDto.offset) orderFindDto.offset = '0'
@@ -37,8 +33,7 @@ export class OrderService {
         limit: Number(orderFindDto.limit),
         offset: Number(orderFindDto.offset),
       })
-    }
-    catch (error) {
+    } catch (error) {
       this.logger.error(error.message, 'findOrders', 'OrderService')
       throw error
     }
@@ -50,9 +45,16 @@ export class OrderService {
     return await this.orderRepository.getOrderById(order.id)
   }
 
-  public async updateOrderById(orderGetDto: OrderGetDto, orderUpdateDto: OrderUpdateDto): Promise<Partial<Order>> {
+  public async updateOrderById(
+    orderGetDto: OrderGetDto,
+    orderUpdateDto: OrderUpdateDto,
+  ): Promise<Partial<Order>> {
     const order = await this.orderRepository.updateOrderById(orderGetDto, orderUpdateDto)
-    if (!order) throw new InternalServerErrorException(Object.assign(orderGetDto, orderUpdateDto), `Update order fails`)
+    if (!order)
+      throw new InternalServerErrorException(
+        Object.assign(orderGetDto, orderUpdateDto),
+        `Update order fails`,
+      )
     return await this.orderRepository.getOrderById(order.id)
   }
 }

@@ -1,7 +1,8 @@
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
+import { ObjectLiteral } from '@server/shares/types'
 
 export function IsUnsignedIntString(validationOptions?: ValidationOptions) {
-  return function(object: Object, propertyName: string) {
+  return function(object: ObjectLiteral, propertyName: string) {
     let errorMessage = `${propertyName} was not provided`
     registerDecorator({
       name: 'IsUnsignedIntString',
@@ -32,7 +33,7 @@ export function IsUnsignedIntString(validationOptions?: ValidationOptions) {
 }
 
 export function IsQueryLimitOutRange(validationOptions?: ValidationOptions) {
-  return function(object: Object, propertyName: string) {
+  return function(object: ObjectLiteral, propertyName: string) {
     let errorMessage = `${propertyName} was not provided`
     registerDecorator({
       name: 'IsQueryLimitOutRange',

@@ -14,9 +14,7 @@ export class OrderRepository extends Repository<Order> {
     this.connection = connection
   }
 
-  public async findOrders(
-    orderFindDto: OrderFindDto,
-  ) {
+  public async findOrders(orderFindDto: OrderFindDto) {
     const limit = Number(orderFindDto.limit)
     const offset = Number(orderFindDto.offset) * limit
     const qb: SelectQueryBuilder<Order> = this.connection
@@ -27,11 +25,7 @@ export class OrderRepository extends Repository<Order> {
     const data = await qb
       .limit(limit)
       .offset(offset)
-      .select([
-        'od."id" AS "id"',
-        'od."message" AS "message"',
-        'od."patientId" AS "patientId"'
-      ])
+      .select(['od."id" AS "id"', 'od."message" AS "message"', 'od."patientId" AS "patientId"'])
       .getRawMany<Partial<Order>>()
     return {
       data,
@@ -44,11 +38,7 @@ export class OrderRepository extends Repository<Order> {
       .getRepository(Order)
       .createQueryBuilder('od')
       .where('od.id = :id', { id })
-      .select([
-        'od."id" AS "id"',
-        'od."message" AS "message"',
-        'od."patientId" AS "patientId"'
-      ])
+      .select(['od."id" AS "id"', 'od."message" AS "message"', 'od."patientId" AS "patientId"'])
       .getRawOne<Partial<Order>>()
   }
 
@@ -56,7 +46,7 @@ export class OrderRepository extends Repository<Order> {
     const order = new Order()
     order.message = dto.message
     order.patient = <Patient>{
-      id: dto.patientId
+      id: dto.patientId,
     }
     return this.connection.getRepository(Order).save(order)
   }
@@ -64,9 +54,10 @@ export class OrderRepository extends Repository<Order> {
   public async updateOrderById(orderGetDto: OrderGetDto, orderUpdateDto: OrderUpdateDto) {
     const order = await this.getOrderById(orderGetDto.id)
     if (orderUpdateDto.message) order.message = orderUpdateDto.message
-    if (orderUpdateDto.patientId) order.patient = <Patient>{
-      id: orderUpdateDto.patientId
-    }
+    if (orderUpdateDto.patientId)
+      order.patient = <Patient>{
+        id: orderUpdateDto.patientId,
+      }
     return this.connection.getRepository(Order).save(order)
   }
 }

@@ -1,4 +1,3 @@
-
 import { ApiProperty } from '@nestjs/swagger'
 import { QueryBaseDtos } from '@server/shares/dtos/paging.dto'
 import { IsUUID } from 'class-validator'

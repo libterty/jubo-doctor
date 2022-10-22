@@ -1,10 +1,24 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, VersionColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, BeforeUpdate, Column, Index, ManyToOne, JoinColumn, RelationId } from "typeorm";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  VersionColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  BeforeUpdate,
+  Column,
+  Index,
+  ManyToOne,
+  JoinColumn,
+  RelationId,
+} from 'typeorm'
 import moment from 'moment'
 import Patient from '@server/entities/Patient'
 
 @Entity({
   name: 'order',
-  synchronize: false
+  synchronize: false,
 })
 export default class Order extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -14,12 +28,10 @@ export default class Order extends BaseEntity {
   public message: string
 
   @Index({ where: '"deletedAt" IS NULL' })
-  @ManyToOne(
-    () => Patient,
-    { nullable: false, onDelete: 'CASCADE', orphanedRowAction: 'delete' }
-  )
+  @ManyToOne(() => Patient, { nullable: false, onDelete: 'CASCADE', orphanedRowAction: 'delete' })
   @JoinColumn({ name: 'patientId', referencedColumnName: 'id' })
   public patient: Patient
+
   @RelationId((self: Order) => self.patient)
   public patientId: string
 
