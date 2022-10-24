@@ -7,6 +7,7 @@ const PatientService = {
                 return res.data;
             })
             .catch((e) => {
+                console.trace('e', e)
                 return e.response.data;
             });
     },

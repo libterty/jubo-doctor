@@ -2,8 +2,8 @@
 import { Inject } from '@nestjs/common'
 import { Connection, EntityRepository, Repository, SelectQueryBuilder } from 'typeorm'
 import Patient from '@server/entities/Patient'
-import { QueryBaseDtos } from '@server/shares/dtos/paging.dto'
 import Order from '@server/entities/Order'
+import { QueryBaseDtos } from '@server/shares/dtos/paging.dto'
 
 @EntityRepository(Patient)
 export class PatientRepository extends Repository<Patient> {

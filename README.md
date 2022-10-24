@@ -52,6 +52,13 @@ make up
 -- When you finished spinning up the application, you can go and see this log if you wanted. If you have any
 questions about logging, see `make logs` command down description below.
 
+-- Here are lists of containers which you can refer to their logs
+    -- doctordb
+    -- doctorpgadmin
+    -- doctorserver
+    -- doctorclient
+    -- nginx
+
 ### Migrations
 
 -- The entites migration is not auto generate by orm, you can find them in `services/manul_migration`

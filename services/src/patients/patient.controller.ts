@@ -25,6 +25,8 @@ export class PatientController {
     count: number
     limit: number
     offset: number
+    currentPage: number
+    totalPages: number
   }> {
     return this.patientService.findPatients(queryBaseDtos)
   }

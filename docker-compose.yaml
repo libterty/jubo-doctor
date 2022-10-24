@@ -49,8 +49,9 @@ services:
       DBDATABASE: doctor
       DBSCHEMA: public
       DBRATETABLE: doctor
-    expose:
-      - 7080
+    # Debug use
+    ports:
+      - '7080:7080'
 
   doctorclient:
     build:

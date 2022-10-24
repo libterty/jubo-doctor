@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNumberString, IsOptional, IsString } from 'class-validator'
-import { IsQueryLimitOutRange, IsUnsignedIntString } from '@server/libs/paging.validation'
+import { IsQueryLimitOutRange, IsUnsignedIntString } from '@server/libs/sync.validation'
 import { Nullable } from '@server/shares/types'
 
 export class QueryBaseDtos {

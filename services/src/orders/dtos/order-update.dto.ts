@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator'
-import { IsPatient } from '@server/libs/patient.validation'
+import { IsPatient } from '@server/libs/async.validation'
 import { Nullable } from '@server/shares/types'
 
 export class OrderUpdateDto {

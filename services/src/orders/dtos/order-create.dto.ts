@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsString, IsUUID, MaxLength, MinLength } from 'class-validator'
-import { IsPatient } from '@server/libs/patient.validation'
+import { IsPatient } from '@server/libs/async.validation'
 
 export class OrderCreateDto {
   @ApiProperty()

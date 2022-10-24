@@ -13,6 +13,6 @@ export const ormConfig: TypeOrmModuleOptions = {
   entities: [Patient, Order],
   migrations: [`${__dirname}./migration/*.ts`],
   subscribers: [],
-  synchronize: true,
-  logging: false,
+  synchronize: false,
+  logging: ['warn', 'error'],
 }

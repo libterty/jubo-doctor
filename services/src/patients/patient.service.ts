@@ -3,11 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm'
 import Patient from '@server/entities/Patient'
 import { PatientRepository } from './patient.repository'
 import { QueryBaseDtos } from '@server/shares/dtos/paging.dto'
-import { ERoutesMap } from '@server/shares/enums'
 
 @Injectable()
 export class PatientService {
-  private readonly logger = new Logger(ERoutesMap.PATIENT, true)
   constructor(
     @InjectRepository(PatientRepository)
     private readonly patientRepository: PatientRepository,
@@ -20,6 +18,8 @@ export class PatientService {
     count: number
     limit: number
     offset: number
+    currentPage: number
+    totalPages: number
   }> {
     try {
       if (!queryBaseDtos.limit) queryBaseDtos.limit = '10'
@@ -28,9 +28,11 @@ export class PatientService {
       return Object.assign(result, {
         limit: Number(queryBaseDtos.limit),
         offset: Number(queryBaseDtos.offset),
+        currentPage: Number(queryBaseDtos.offset),
+        totalPages: Math.ceil(Number(queryBaseDtos.limit) / Number(queryBaseDtos.offset))
       })
     } catch (error) {
-      this.logger.error(error.message, 'findTodos', 'TodoService')
+      Logger.error(error.message, 'findTodos', 'TodoService', true)
       throw error
     }
   }

@@ -7,7 +7,6 @@ import { ERoutesMap } from '@server/shares/enums'
 
 @Injectable()
 export class OrderService {
-  private readonly logger = new Logger(ERoutesMap.ORDER, true)
   constructor(
     @InjectRepository(OrderRepository)
     private readonly orderRepository: OrderRepository,
@@ -38,7 +37,7 @@ export class OrderService {
         totalPages: Math.ceil(Number(orderFindDto.limit) / Number(orderFindDto.offset))
       })
     } catch (error) {
-      this.logger.error(error.message, 'findOrders', 'OrderService')
+      Logger.error(error.message, 'findOrders', 'OrderService', true)
       throw error
     }
   }
