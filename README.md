@@ -53,11 +53,11 @@ make up
 questions about logging, see `make logs` command down description below.
 
 -- Here are lists of containers which you can refer to their logs
-    -- doctordb
-    -- doctorpgadmin
-    -- doctorserver
-    -- doctorclient
-    -- nginx
+> - doctordb
+> - doctorpgadmin
+> - doctorserver
+> - doctorclient
+> - nginx
 
 ### Migrations
 
